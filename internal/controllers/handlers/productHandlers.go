@@ -65,6 +65,7 @@ func (h *Handler) CreateProduct(c *gin.Context) {
 		Price:      createProduct.Price,
 		CategoryID: createProduct.CategoryID,
 		Category:   models.Category{},
+		Attributes: []models.Attribute{},
 	}
 
 	createdProduct, err := h.productService.Create(product)
@@ -95,6 +96,7 @@ func (h *Handler) UpdateProduct(c *gin.Context) {
 		Price:      *updateProduct.Price,
 		CategoryID: *updateProduct.CategoryID,
 		Category:   models.Category{},
+		Attributes: []models.Attribute{},
 	}
 
 	updatedProduct, err := h.productService.Update(id, product)
