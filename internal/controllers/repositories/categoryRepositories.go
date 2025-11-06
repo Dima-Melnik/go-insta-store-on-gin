@@ -20,8 +20,8 @@ func NewCategoryRepositories(DB *gorm.DB) c.CategoryRepositories {
 func (r *categoryRepositories) GetAll() ([]*models.Category, error) {
 	var categories []*models.Category
 
-	if err := r.db.Preload("Products").Find(&categories); err != nil {
-		return nil, err.Error
+	if err := r.db.Preload("Products").Find(&categories).Error; err != nil {
+		return nil, err
 	}
 
 	return categories, nil
@@ -30,8 +30,8 @@ func (r *categoryRepositories) GetAll() ([]*models.Category, error) {
 func (r *categoryRepositories) GetByID(id uint) (*models.Category, error) {
 	var category *models.Category
 
-	if err := r.db.Preload("Product").First(&category, id); err != nil {
-		return nil, err.Error
+	if err := r.db.Preload("Products").First(&category, id).Error; err != nil {
+		return nil, err
 	}
 
 	return category, nil
@@ -40,32 +40,32 @@ func (r *categoryRepositories) GetByID(id uint) (*models.Category, error) {
 func (r *categoryRepositories) GetByName(name string) (*models.Category, error) {
 	var category *models.Category
 
-	if err := r.db.Preload("Product").First(&category, name); err != nil {
-		return nil, err.Error
+	if err := r.db.Preload("Products").Where("name ILIKE ?", name).First(&category, name).Error; err != nil {
+		return nil, err
 	}
 
 	return category, nil
 }
 
 func (r *categoryRepositories) Create(data models.Category) (*models.Category, error) {
-	if err := r.db.Save(&data); err != nil {
-		return nil, err.Error
+	if err := r.db.Save(&data).Error; err != nil {
+		return nil, err
 	}
 
 	return &data, nil
 }
 
 func (r *categoryRepositories) Update(id uint, data models.Category) (*models.Category, error) {
-	if err := r.db.Model(&models.Category{}).Clauses(clause.Returning{}).Where("id = ?", id).Updates(&data); err != nil {
-		return nil, err.Error
+	if err := r.db.Model(&models.Category{}).Clauses(clause.Returning{}).Where("id = ?", id).Updates(&data).Error; err != nil {
+		return nil, err
 	}
 
 	return &data, nil
 }
 
 func (r *categoryRepositories) Delete(id uint) error {
-	if err := r.db.Delete(&models.Category{}, id); err != nil {
-		return err.Error
+	if err := r.db.Delete(&models.Category{}, id).Error; err != nil {
+		return err
 	}
 
 	return nil
