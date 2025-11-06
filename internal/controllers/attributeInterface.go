@@ -11,7 +11,7 @@ type AttributesRepositories interface {
 	Delete(id uint) error
 }
 
-type AttrbiutesServices interface {
+type AttributesServices interface {
 	GetAll() ([]*models.Attribute, error)
 	GetByID(id uint) (*models.Attribute, error)
 	GetByName(name string) (*models.Attribute, error)

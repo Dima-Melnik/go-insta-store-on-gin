@@ -64,13 +64,13 @@ func (h *Handler) CreateAttribute(c *gin.Context) {
 		Products: []models.Product{},
 	}
 
-	createdProduct, err := h.attributeService.Create(attribute)
+	createdCategory, err := h.attributeService.Create(attribute)
 	if err != nil {
 		utils.SendError(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	utils.SendJSON(c, http.StatusCreated, dto.ToAttributeResponse(createdProduct))
+	utils.SendJSON(c, http.StatusCreated, dto.ToAttributeResponse(createdCategory))
 }
 
 func (h *Handler) UpdateAttribute(c *gin.Context) {

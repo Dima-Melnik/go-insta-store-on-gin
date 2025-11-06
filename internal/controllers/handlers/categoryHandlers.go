@@ -62,13 +62,13 @@ func (h *Handler) CreateCategory(c *gin.Context) {
 		Products: []models.Product{},
 	}
 
-	createdProduct, err := h.categoryService.Create(category)
+	createdCategory, err := h.categoryService.Create(category)
 	if err != nil {
 		utils.SendError(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	utils.SendJSON(c, http.StatusCreated, dto.ToCategoryResponse(createdProduct))
+	utils.SendJSON(c, http.StatusCreated, dto.ToCategoryResponse(createdCategory))
 }
 
 func (h *Handler) UpdateCategory(c *gin.Context) {

@@ -10,13 +10,13 @@ import (
 type Handler struct {
 	productService   c.ProductServices
 	categoryService  c.CategoryServices
-	attributeService c.AttrbiutesServices
+	attributeService c.AttributesServices
 }
 
 type HandlerConfig struct {
 	ProductService  c.ProductServices
 	CategoryService c.CategoryServices
-	AttrbiteService c.AttrbiutesServices
+	AttrbiteService c.AttributesServices
 }
 
 func NewHandler(cfg *HandlerConfig) *Handler {

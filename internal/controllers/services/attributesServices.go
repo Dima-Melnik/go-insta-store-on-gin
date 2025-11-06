@@ -9,7 +9,7 @@ type attributesServices struct {
 	repo c.AttributesRepositories
 }
 
-func NewAttributesServices(Repo c.AttributesRepositories) c.AttrbiutesServices {
+func NewAttributesServices(Repo c.AttributesRepositories) c.AttributesServices {
 	return &attributesServices{
 		repo: Repo,
 	}
