@@ -8,19 +8,22 @@ import (
 )
 
 type Handler struct {
-	productService  c.ProductServices
-	categoryService c.CategoryServices
+	productService   c.ProductServices
+	categoryService  c.CategoryServices
+	attributeService c.AttrbiutesServices
 }
 
 type HandlerConfig struct {
 	ProductService  c.ProductServices
 	CategoryService c.CategoryServices
+	AttrbiteService c.AttrbiutesServices
 }
 
 func NewHandler(cfg *HandlerConfig) *Handler {
 	return &Handler{
-		productService:  cfg.ProductService,
-		categoryService: cfg.CategoryService,
+		productService:   cfg.ProductService,
+		categoryService:  cfg.CategoryService,
+		attributeService: cfg.AttrbiteService,
 	}
 }
 
@@ -29,13 +32,16 @@ func InitAllHandlers() *Handler {
 
 	productRepo := r.NewProductRepositories(db)
 	categoryRepo := r.NewCategoryRepositories(db)
+	attributeRepo := r.NewAttrbiteRepositories(db)
 
 	productService := s.NewProductServices(productRepo)
 	categoryService := s.NewCategoryServices(categoryRepo)
+	attributeService := s.NewAttributesServices(attributeRepo)
 
 	h := NewHandler(&HandlerConfig{
 		ProductService:  productService,
 		CategoryService: categoryService,
+		AttrbiteService: attributeService,
 	})
 
 	return h
